@@ -71,8 +71,6 @@ public class TapableLinkLabel: UILabel {
                 let link = attributes[.link],
                 didTapTextInLabel(locationOfTouch: point, inRange: range) else { return }
             
-            print("tap \(link)")
-            
             if let urlLink = link as? URL {
                 self.delegate?.tapableLinkLabel(self, openURL: urlLink)
             } else if let stringLink = link as? String {
