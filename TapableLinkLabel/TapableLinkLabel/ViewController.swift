@@ -32,11 +32,14 @@ class ViewController: UIViewController {
         
         let shortText = NSMutableAttributedString(string: "Hello! This is link")
         _ = shortText.setAsLink(textToFind: "link", linkURL: "https://www.google1.com")
+        shortOneLineTextLabel.textAlignment = .center
         shortOneLineTextLabel.attributedText = shortText
+        shortOneLineTextLabel.delegate = self
         
         let longText = NSMutableAttributedString(string: "Lorem ipsum dolor sit amet, link consectetur adipiscing elit")
         _ = longText.setAsLink(textToFind: "link", linkURL: "https://www.google2.com")
         longOneLineTextLabel.attributedText = longText
+        longOneLineTextLabel.delegate = self
         
         let multilineText = NSMutableAttributedString(string: """
             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -50,6 +53,7 @@ class ViewController: UIViewController {
     """)
         _ = multilineText.setAsLink(textToFind: "link", linkURL: "https://www.google3.com")
         multilineLabel.attributedText = multilineText
+        multilineLabel.delegate = self
     }
 
 
