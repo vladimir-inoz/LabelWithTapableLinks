@@ -39,16 +39,19 @@ public class TapableLinkLabel: UILabel {
         addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func makeLayoutManager(attributedString: NSAttributedString) {
+    private func makeLayoutManager(string: NSAttributedString) {
         // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
         layoutManager = NSLayoutManager()
-        textContainer = NSTextContainer(size: CGSize.zero)
-        textStorage = NSTextStorage(attributedString: attributedString)
+        textContainer = NSTextContainer(size: .zero)
+        textStorage = NSTextStorage(attributedString: string)
 
         // Configure layoutManager and textStorage
         layoutManager.addTextContainer(textContainer)
         
         textStorage.addLayoutManager(layoutManager)
+        if let validFont = font {
+            textStorage.addAttribute(.font, value: validFont, range: NSRange(location: 0, length: string.length))
+        }
 
         // Configure textContainer
         textContainer.lineFragmentPadding = 0.0
@@ -59,7 +62,7 @@ public class TapableLinkLabel: UILabel {
     
     @objc private func tapActionHandler(sender: UITapGestureRecognizer) {
         guard let attributedText = self.attributedText else { return }
-        makeLayoutManager(attributedString: attributedText)
+        makeLayoutManager(string: attributedText)
         let point = sender.location(in: self)
         let range = NSRange(location: 0, length: attributedText.length)
         attributedText.enumerateAttributes(in: range, options: []) { [weak self] attributes, range, _ in
@@ -67,6 +70,8 @@ public class TapableLinkLabel: UILabel {
             guard let self = self,
                 let link = attributes[.link],
                 didTapTextInLabel(locationOfTouch: point, inRange: range) else { return }
+            
+            print("tap \(link)")
             
             if let urlLink = link as? URL {
                 self.delegate?.tapableLinkLabel(self, openURL: urlLink)

@@ -31,11 +31,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let shortText = NSMutableAttributedString(string: "Hello! This is link")
-        _ = shortText.setAsLink(textToFind: "link", linkURL: "https://www.google.com")
+        _ = shortText.setAsLink(textToFind: "link", linkURL: "https://www.google1.com")
         shortOneLineTextLabel.attributedText = shortText
         
         let longText = NSMutableAttributedString(string: "Lorem ipsum dolor sit amet, link consectetur adipiscing elit")
-        _ = longText.setAsLink(textToFind: "link", linkURL: "https://www.google.com")
+        _ = longText.setAsLink(textToFind: "link", linkURL: "https://www.google2.com")
         longOneLineTextLabel.attributedText = longText
         
         let multilineText = NSMutableAttributedString(string: """
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             Tempus egestas sed sed risus pretium quam vulputate.
             Eget gravida cum sociis natoque.
     """)
-        _ = multilineText.setAsLink(textToFind: "link", linkURL: "https://www.google.com")
+        _ = multilineText.setAsLink(textToFind: "link", linkURL: "https://www.google3.com")
         multilineLabel.attributedText = multilineText
     }
 
