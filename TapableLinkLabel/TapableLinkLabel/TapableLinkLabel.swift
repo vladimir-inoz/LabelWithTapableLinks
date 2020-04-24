@@ -47,6 +47,7 @@ public class TapableLinkLabel: UILabel {
 
         // Configure layoutManager and textStorage
         layoutManager.addTextContainer(textContainer)
+        
         textStorage.addLayoutManager(layoutManager)
 
         // Configure textContainer
@@ -75,14 +76,32 @@ public class TapableLinkLabel: UILabel {
         }
     }
     
+    private func textContainerOffset(forAlignment alignment: NSTextAlignment) -> CGPoint {
+        let ratio: CGFloat
+        
+        switch alignment {
+        case .left:
+            ratio = 0
+        case .center:
+            ratio = 0.5
+        case .right:
+            ratio = 1
+        default:
+            ratio = 0
+        }
+        
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        let textContainerOffsetX = (bounds.size.width - textBoundingBox.size.width) * ratio - textBoundingBox.origin.x
+        let textContainerOffsetY = (bounds.size.height - textBoundingBox.size.height) * ratio - textBoundingBox.origin.y
+        let textContainerOffset = CGPoint(x: textContainerOffsetX, y: textContainerOffsetY)
+        return textContainerOffset
+    }
+    
     private func didTapTextInLabel(locationOfTouch: CGPoint, inRange targetRange: NSRange) -> Bool {
         // Find the tapped character location and compare it to the specified range
-        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        let textContainerOffsetX = (bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x
-        let textContainerOffsetY = (bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y
-        let textContainerOffset = CGPoint(x: textContainerOffsetX, y: textContainerOffsetY)
-        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouch.x - textContainerOffset.x,
-                                                     y: locationOfTouch.y - textContainerOffset.y)
+        let offset = textContainerOffset(forAlignment: textAlignment)
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouch.x - offset.x,
+                                                     y: locationOfTouch.y - offset.y)
         let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer,
                                                             in: textContainer,
                                                             fractionOfDistanceBetweenInsertionPoints: nil)
