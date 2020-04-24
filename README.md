@@ -1,0 +1,1 @@
+Lightweight implementation of `UILabel` subclass that handles taps on inline links in `NSAttributedString`. Adopt `TapableLinkLabel` in yout project
