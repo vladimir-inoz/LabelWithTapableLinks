@@ -33,6 +33,8 @@ public class TapableLinkLabel: UILabel {
     }
     
     private func setupUI() {
+        layoutManager = NSLayoutManager()
+        
         isUserInteractionEnabled = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapActionHandler))
@@ -40,8 +42,7 @@ public class TapableLinkLabel: UILabel {
     }
     
     private func makeLayoutManager(string: NSAttributedString) {
-        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
-        layoutManager = NSLayoutManager()
+        // Create instances of NSTextContainer and NSTextStorage
         textContainer = NSTextContainer(size: .zero)
         textStorage = NSTextStorage(attributedString: string)
 
