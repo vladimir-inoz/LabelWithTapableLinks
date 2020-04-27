@@ -13,7 +13,7 @@
 		E3B2F37A2452C7E600BFA78E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B2F3782452C7E600BFA78E /* Main.storyboard */; };
 		E3B2F37C2452C7E800BFA78E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3B2F37B2452C7E800BFA78E /* Assets.xcassets */; };
 		E3B2F37F2452C7E800BFA78E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B2F37D2452C7E800BFA78E /* LaunchScreen.storyboard */; };
-		E3B2F3872452C7F800BFA78E /* TapableLinkLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2F3862452C7F800BFA78E /* TapableLinkLabel.swift */; };
+		E3B2F3872452C7F800BFA78E /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2F3862452C7F800BFA78E /* TapableLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		E3B2F37B2452C7E800BFA78E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3B2F37E2452C7E800BFA78E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3B2F3802452C7E800BFA78E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3B2F3862452C7F800BFA78E /* TapableLinkLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableLinkLabel.swift; sourceTree = "<group>"; };
+		E3B2F3862452C7F800BFA78E /* TapableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 				E3B2F3722452C7E600BFA78E /* AppDelegate.swift */,
 				E3B2F3742452C7E600BFA78E /* SceneDelegate.swift */,
 				E3B2F3762452C7E600BFA78E /* ViewController.swift */,
-				E3B2F3862452C7F800BFA78E /* TapableLinkLabel.swift */,
+				E3B2F3862452C7F800BFA78E /* TapableLabel.swift */,
 				E3B2F3782452C7E600BFA78E /* Main.storyboard */,
 				E3B2F37B2452C7E800BFA78E /* Assets.xcassets */,
 				E3B2F37D2452C7E800BFA78E /* LaunchScreen.storyboard */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3B2F3872452C7F800BFA78E /* TapableLinkLabel.swift in Sources */,
+				E3B2F3872452C7F800BFA78E /* TapableLabel.swift in Sources */,
 				E3B2F3772452C7E600BFA78E /* ViewController.swift in Sources */,
 				E3B2F3732452C7E600BFA78E /* AppDelegate.swift in Sources */,
 				E3B2F3752452C7E600BFA78E /* SceneDelegate.swift in Sources */,

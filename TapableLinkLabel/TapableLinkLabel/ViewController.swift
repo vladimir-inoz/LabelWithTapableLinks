@@ -23,9 +23,9 @@ extension NSMutableAttributedString {
 
 class ViewController: UIViewController {
     
-    @IBOutlet private weak var shortOneLineTextLabel: TapableLinkLabel!
-    @IBOutlet private weak var longOneLineTextLabel: TapableLinkLabel!
-    @IBOutlet private weak var multilineLabel: TapableLinkLabel!
+    @IBOutlet private weak var shortOneLineTextLabel: TapableLabel!
+    @IBOutlet private weak var longOneLineTextLabel: TapableLabel!
+    @IBOutlet private weak var multilineLabel: TapableLabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,15 +59,9 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: TapableLinkLabelDelegate {
-    func tapableLinkLabel(_ label: TapableLinkLabel, openString string: String) {
-        print("String link \(string)")
+extension ViewController: TapableLabelDelegate {
+    func tapableLabel(_ label: TapableLabel, detectedLinkTap link: String) {
+        print("String link \(link)")
     }
-    
-    func tapableLinkLabel(_ label: TapableLinkLabel, openURL url: URL) {
-        print("URL link \(url)")
-    }
-    
-    
 }
 

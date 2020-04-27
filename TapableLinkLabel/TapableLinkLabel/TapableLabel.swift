@@ -1,6 +1,6 @@
 //
-//  TapableLinkLabel.swift
-//  TapableLinkLabel
+//  TapableLabel.swift
+//  TapableLabel
 //
 //  Created by Vladimir Inozemtsev on 24.04.2020.
 //  Copyright © 2020 Vladimir Inozemtsev. All rights reserved.
@@ -80,7 +80,7 @@ public class TapableLabel: UILabel {
 
             guard let self = self,
                 let link = attributes[.link],
-                didTapTextInLabel(locationOfTouch: point, inRange: range) else { return }
+                doesPoint(withCoordinates: point, intersectsTextInRange: range) else { return }
             
             if let urlLink = link as? URL {
                 self.delegate?.tapableLabel(self, detectedLinkTap: urlLink.absoluteString)
@@ -111,11 +111,10 @@ public class TapableLabel: UILabel {
         return textContainerOffset
     }
     
-    private func didTapTextInLabel(locationOfTouch: CGPoint, inRange targetRange: NSRange) -> Bool {
+    private func doesPoint(withCoordinates point: CGPoint, intersectsTextInRange targetRange: NSRange) -> Bool {
         // Find the tapped character location and compare it to the specified range
         let offset = textContainerOffset(forAlignment: textAlignment)
-        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouch.x - offset.x,
-                                                     y: locationOfTouch.y - offset.y)
+        let locationOfTouchInTextContainer = CGPoint(x: point.x - offset.x, y: point.y - offset.y)
         let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer,
                                                             in: textContainer,
                                                             fractionOfDistanceBetweenInsertionPoints: nil)
