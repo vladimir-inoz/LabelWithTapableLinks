@@ -10,17 +10,16 @@ import UIKit
 
 // Implementation from https://stackoverflow.com/q/1256887/7019874
 
-public protocol TapableLinkLabelDelegate: AnyObject {
-    func tapableLinkLabel(_ label: TapableLinkLabel, openString: String)
-    func tapableLinkLabel(_ label: TapableLinkLabel, openURL: URL)
+public protocol TapableLabelDelegate: AnyObject {
+    func tapableLabel(_ label: TapableLabel, detectedLinkTap: String)
 }
 
-public class TapableLinkLabel: UILabel {
+public class TapableLabel: UILabel {
     
     private var layoutManager: NSLayoutManager!
     private var textContainer: NSTextContainer!
     private var textStorage: NSTextStorage!
-    public weak var delegate: TapableLinkLabelDelegate?
+    public weak var delegate: TapableLabelDelegate?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,9 +83,9 @@ public class TapableLinkLabel: UILabel {
                 didTapTextInLabel(locationOfTouch: point, inRange: range) else { return }
             
             if let urlLink = link as? URL {
-                self.delegate?.tapableLinkLabel(self, openURL: urlLink)
+                self.delegate?.tapableLabel(self, detectedLinkTap: urlLink.absoluteString)
             } else if let stringLink = link as? String {
-                self.delegate?.tapableLinkLabel(self, openString: stringLink)
+                self.delegate?.tapableLabel(self, detectedLinkTap: stringLink)
             }
         }
     }
