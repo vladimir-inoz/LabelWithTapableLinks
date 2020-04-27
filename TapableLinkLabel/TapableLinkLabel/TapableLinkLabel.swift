@@ -32,38 +32,49 @@ public class TapableLinkLabel: UILabel {
         setupUI()
     }
     
+    public override var attributedText: NSAttributedString? {
+        didSet {
+            guard let attributedString = attributedText else { return }
+            textStorage.setAttributedString(attributedString)
+        }
+    }
+    
+    public override var lineBreakMode: NSLineBreakMode {
+        didSet {
+            textContainer.lineBreakMode = lineBreakMode
+        }
+    }
+    
+    public override var numberOfLines: Int {
+        didSet {
+            textContainer.maximumNumberOfLines = numberOfLines
+        }
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        textContainer.size = bounds.size
+    }
+    
     private func setupUI() {
         layoutManager = NSLayoutManager()
         
+        textContainer = NSTextContainer(size: .zero)
+        textContainer.lineFragmentPadding = 0.0
+        
+        textStorage = NSTextStorage()
+
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+    
         isUserInteractionEnabled = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapActionHandler))
         addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func makeLayoutManager(string: NSAttributedString) {
-        // Create instances of NSTextContainer and NSTextStorage
-        textContainer = NSTextContainer(size: .zero)
-        textStorage = NSTextStorage(attributedString: string)
-
-        // Configure layoutManager and textStorage
-        layoutManager.addTextContainer(textContainer)
-        
-        textStorage.addLayoutManager(layoutManager)
-        if let validFont = font {
-            textStorage.addAttribute(.font, value: validFont, range: NSRange(location: 0, length: string.length))
-        }
-
-        // Configure textContainer
-        textContainer.lineFragmentPadding = 0.0
-        textContainer.lineBreakMode = lineBreakMode
-        textContainer.maximumNumberOfLines = numberOfLines
-        textContainer.size = bounds.size
-    }
-    
     @objc private func tapActionHandler(sender: UITapGestureRecognizer) {
         guard let attributedText = self.attributedText else { return }
-        makeLayoutManager(string: attributedText)
         let point = sender.location(in: self)
         let range = NSRange(location: 0, length: attributedText.length)
         attributedText.enumerateAttributes(in: range, options: []) { [weak self] attributes, range, _ in
