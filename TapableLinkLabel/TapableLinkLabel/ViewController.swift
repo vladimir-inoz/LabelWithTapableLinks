@@ -31,15 +31,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let shortText = NSMutableAttributedString(string: "Hello! This is link")
+        shortText.addAttribute(.font, value: UIFont.systemFont(ofSize: 10), range: NSRange(location: 0, length: shortText.length))
         _ = shortText.setAsLink(textToFind: "link", linkURL: "https://www.google1.com")
         shortOneLineTextLabel.textAlignment = .center
         shortOneLineTextLabel.attributedText = shortText
         shortOneLineTextLabel.delegate = self
+        shortOneLineTextLabel.isDebug = true
         
         let longText = NSMutableAttributedString(string: "Lorem ipsum dolor sit amet, link consectetur adipiscing elit")
+        longText.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: NSRange(location: 0, length: longText.length))
         _ = longText.setAsLink(textToFind: "link", linkURL: "https://www.google2.com")
         longOneLineTextLabel.attributedText = longText
         longOneLineTextLabel.delegate = self
+        longOneLineTextLabel.isDebug = true
         
         let multilineText = NSMutableAttributedString(string: """
             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -51,12 +55,14 @@ class ViewController: UIViewController {
             Tempus egestas sed sed risus pretium quam vulputate.
             Eget gravida cum sociis natoque.
     """)
+        multilineText.addAttribute(.font, value: UIFont.systemFont(ofSize: 20), range: NSRange(location: 0, length: multilineText.length))
         _ = multilineText.setAsLink(textToFind: "link", linkURL: "https://www.google3.com")
         multilineLabel.attributedText = multilineText
         multilineLabel.delegate = self
+        multilineLabel.isDebug = true
+        
+        view.layoutIfNeeded()
     }
-
-
 }
 
 extension ViewController: TapableLabelDelegate {
