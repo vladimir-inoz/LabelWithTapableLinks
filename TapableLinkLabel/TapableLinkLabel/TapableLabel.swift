@@ -20,6 +20,13 @@ public class TapableLabel: UILabel {
     private var textContainer: NSTextContainer!
     private var textStorage: NSTextStorage!
     public weak var delegate: TapableLabelDelegate?
+    public var isDebug = false {
+        didSet {
+            debugLayer.isHidden = isDebug == false
+        }
+    }
+    
+    private var debugLayer: CAShapeLayer!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +60,16 @@ public class TapableLabel: UILabel {
     public override func layoutSubviews() {
         super.layoutSubviews()
         textContainer.size = bounds.size
+
+        if isDebug {
+            let combinedPath = CGMutablePath()
+
+            glyphs().forEach {
+                combinedPath.addPath(CGPath(rect: $0, transform: nil))
+            }
+
+            debugLayer.path = combinedPath
+        }
     }
     
     private func setupUI() {
@@ -70,6 +87,11 @@ public class TapableLabel: UILabel {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapActionHandler))
         addGestureRecognizer(tapGestureRecognizer)
+        
+        debugLayer = CAShapeLayer()
+        debugLayer.fillColor = UIColor(displayP3Red: 1, green: 0, blue: 0, alpha: 0.5).cgColor
+        debugLayer.strokeColor = UIColor.red.cgColor
+        layer.addSublayer(debugLayer)
     }
     
     @objc private func tapActionHandler(sender: UITapGestureRecognizer) {
@@ -120,5 +142,18 @@ public class TapableLabel: UILabel {
                                                             fractionOfDistanceBetweenInsertionPoints: nil)
 
         return NSLocationInRange(indexOfCharacter, targetRange)
+    }
+}
+
+// MARK: - Debug
+
+private extension TapableLabel {
+    private func glyphs() -> [CGRect] {
+        return (0..<layoutManager.numberOfGlyphs).map { index in
+            let range = NSRange(location: index, length: 1)
+            let sourceRect = layoutManager.boundingRect(forGlyphRange: range, in: textContainer)
+            let offset = textContainerOffset(forAlignment: textAlignment)
+            return sourceRect.offsetBy(dx: offset.x, dy: offset.y)
+        }
     }
 }
