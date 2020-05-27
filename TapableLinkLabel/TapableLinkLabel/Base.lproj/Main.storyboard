@@ -40,17 +40,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0th-me-FIE">
+                                <rect key="frame" x="16" y="815" width="51" height="31"/>
+                                <connections>
+                                    <action selector="debugSwitchValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="tpj-pn-CJQ"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debug glyph bounds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOM-U4-efu">
+                                <rect key="frame" x="81" y="820" width="160" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="k3Z-38-XJH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="0Xs-DP-gof"/>
                             <constraint firstItem="k3Z-38-XJH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="0xC-Kc-BcC"/>
+                            <constraint firstItem="0th-me-FIE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BEG-eJ-CUU"/>
                             <constraint firstItem="9gX-5V-7fp" firstAttribute="top" secondItem="k3Z-38-XJH" secondAttribute="bottom" constant="16" id="MUc-f4-iA3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0th-me-FIE" secondAttribute="bottom" constant="16" id="S0s-Tr-yiy"/>
                             <constraint firstItem="U7s-g5-phs" firstAttribute="top" secondItem="9gX-5V-7fp" secondAttribute="bottom" constant="16" id="XUc-on-91l"/>
+                            <constraint firstItem="mOM-U4-efu" firstAttribute="leading" secondItem="0th-me-FIE" secondAttribute="trailing" constant="16" id="ZUO-2f-l1N"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k3Z-38-XJH" secondAttribute="trailing" constant="16" id="brm-Dq-G4t"/>
                             <constraint firstItem="U7s-g5-phs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jNz-CS-hte"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9gX-5V-7fp" secondAttribute="trailing" constant="16" id="kL6-sU-oMC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U7s-g5-phs" secondAttribute="trailing" constant="16" id="sEz-gr-WQt"/>
+                            <constraint firstItem="mOM-U4-efu" firstAttribute="centerY" secondItem="0th-me-FIE" secondAttribute="centerY" id="sjV-CN-elW"/>
                             <constraint firstItem="9gX-5V-7fp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="y8i-DP-Y1u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

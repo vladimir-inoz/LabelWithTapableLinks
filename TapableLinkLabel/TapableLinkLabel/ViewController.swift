@@ -65,6 +65,12 @@ class ViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
+    @IBAction func debugSwitchValueChanged(_ sender: UISwitch) {
+        [shortOneLineTextLabel, longOneLineTextLabel, multilineLabel].forEach {
+            $0?.isDebug = sender.isOn
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         let lastGlyphRect = multilineLabel.convert(multilineLabel.lastGlyphRect(), to: view)
         lastGlyphIndicatorLabel.frame.origin = CGPoint(x: lastGlyphRect.maxX + 10, y: lastGlyphRect.minY)
