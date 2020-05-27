@@ -143,17 +143,26 @@ public class TapableLabel: UILabel {
 
         return NSLocationInRange(indexOfCharacter, targetRange)
     }
+    
+    public func lastGlyphRect() -> CGRect {
+        return glyphRect(forIndex: layoutManager.numberOfGlyphs)
+    }
 }
 
 // MARK: - Debug
 
 private extension TapableLabel {
+    
+    private func glyphRect(forIndex index: Int) -> CGRect {
+        let range = NSRange(location: index, length: 1)
+        let sourceRect = layoutManager.boundingRect(forGlyphRange: range, in: textContainer)
+        let offset = textContainerOffset(forAlignment: textAlignment)
+        return sourceRect.offsetBy(dx: offset.x, dy: offset.y)
+    }
+    
     private func glyphs() -> [CGRect] {
         return (0..<layoutManager.numberOfGlyphs).map { index in
-            let range = NSRange(location: index, length: 1)
-            let sourceRect = layoutManager.boundingRect(forGlyphRange: range, in: textContainer)
-            let offset = textContainerOffset(forAlignment: textAlignment)
-            return sourceRect.offsetBy(dx: offset.x, dy: offset.y)
+            return glyphRect(forIndex: index)
         }
     }
 }
