@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var shortOneLineTextLabel: TapableLabel!
     @IBOutlet private weak var longOneLineTextLabel: TapableLabel!
     @IBOutlet private weak var multilineLabel: TapableLabel!
+    @IBOutlet private weak var lastGlyphIndicatorLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,7 @@ class ViewController: UIViewController {
             Consequat nisl vel pretium link lectus quam id leo.
             Eget velit aliquet sagittis id consectetur.
             Tempus egestas sed sed risus pretium quam vulputate.
-            Eget gravida cum sociis natoque.
+            Eget gravida cum sociis.
     """)
         multilineText.addAttribute(.font, value: UIFont.systemFont(ofSize: 20), range: NSRange(location: 0, length: multilineText.length))
         _ = multilineText.setAsLink(textToFind: "link", linkURL: "https://www.google3.com")
@@ -62,6 +63,11 @@ class ViewController: UIViewController {
         multilineLabel.isDebug = true
         
         view.layoutIfNeeded()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let lastGlyphRect = multilineLabel.convert(multilineLabel.lastGlyphRect(), to: view)
+        lastGlyphIndicatorLabel.frame.origin = CGPoint(x: lastGlyphRect.maxX + 10, y: lastGlyphRect.minY)
     }
 }
 

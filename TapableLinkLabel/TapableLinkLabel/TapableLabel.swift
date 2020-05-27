@@ -145,7 +145,7 @@ public class TapableLabel: UILabel {
     }
     
     public func lastGlyphRect() -> CGRect {
-        return glyphRect(forIndex: layoutManager.numberOfGlyphs)
+        return glyphRect(forIndex: layoutManager.numberOfGlyphs - 1)
     }
 }
 
